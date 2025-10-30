@@ -1,0 +1,314 @@
+---
+description: React best practices and patterns for modern web applications
+globs: **/*.tsx, **/*.jsx, components/**/*
+alwaysApply: false
+---
+# React Best Practices
+
+## Component Structure
+- Use functional components over class components
+- Keep components small and focused (max 200-300 lines)
+- Extract reusable logic into custom hooks
+- Use composition over inheritance
+- Implement proper prop types with TypeScript
+- Split large components into smaller, focused ones
+- Follow the Single Responsibility Principle
+- Use proper file naming conventions (PascalCase for components)
+- Keep component files in appropriate feature directories
+
+## Component Design and Ant Design Usage
+- Use Shadcn-ui components as base building blocks:
+  - Layout components (Layout, Row, Col)
+  - Navigation components (Menu, Breadcrumb)
+  - Data Entry components (Form, Input, Select)
+  - Data Display components (Table, Card, List)
+  - Feedback components (Modal, Message, Notification)
+  - Other components (Button, Icon, Typography)
+- Follow component organization:
+  - Auth Layout: Main layout structure and navigation
+  - table: Data table implementations
+  - React Hook Form: Form handling and validation
+  - Dialog: Modal dialogs and confirmations
+  - Spinner: Loading states and spinners
+  - ErrorBoundary: Error handling components
+  - BreadCrumbComponent: Breadcrumbs
+  - Use-toast hook to show toasts
+  - SearchBox: search inputs
+- Implement proper component composition:
+  - Use AuthLayout for page structure
+  - Use table for data tables
+  - Use React hook form with zod for form handling
+  - Use dialog for dialogs
+  - Use Spinner for loading states
+  - Use AppErrorBoundary for error handling
+  - Use BreadCrumbComponent for breadcrumbs
+  - Use use-toast hook for displaying toasts
+  - Use SearchBox component for search
+- Follow component styling guidelines:
+  - Use tailwindcss for custom styling
+  - Extend Shad-cn ui components when needed
+  - Follow theme-based styling approach
+  - Implement responsive design
+  - Use proper spacing and alignment
+- Implement proper component state:
+  - Use local state for UI state
+  - Use global state for shared data
+  - Handle loading states properly
+  - Implement error states
+  - Manage form state effectively
+- Follow component naming conventions:
+  - Prefix with 'App' for custom components
+  - Use descriptive names
+  - Follow PascalCase convention
+  - Group related components
+- Implement proper component props:
+  - Use TypeScript interfaces
+  - Document prop types
+  - Provide default values
+  - Handle optional props
+- Follow component documentation:
+  - Document component purpose
+  - Document prop types
+  - Provide usage examples
+  - Document limitations
+- Implement proper component testing:
+  - Test component rendering
+  - Test user interactions
+  - Test error states
+  - Test loading states
+- Handle component accessibility:
+  - Use semantic HTML
+  - Implement ARIA attributes
+  - Ensure keyboard navigation
+  - Test with screen readers
+
+## Hooks
+- Follow the Rules of Hooks
+- Use custom hooks for reusable logic
+- Keep hooks focused and simple
+- Use appropriate dependency arrays in useEffect
+- Implement cleanup in useEffect when needed
+- Avoid nested hooks
+- Use useCallback for event handlers
+- Use useMemo for expensive computations
+- Implement proper error handling in async hooks
+- Use proper TypeScript types for hooks
+
+## State Management
+- Use useState for local component state
+- Implement useReducer for complex state logic
+- Use Context API for shared state
+- Keep state as close to where it's used as possible
+- Avoid prop drilling through proper state management
+- Use state management libraries only when necessary
+- Implement proper state initialization
+- Handle loading and error states
+- Use proper TypeScript types for state
+- Implement proper state updates
+
+## Redux/State Management
+- Organize reducers by feature/module (e.g., dashboard)
+- Use Redux Toolkit for modern Redux development
+- Implement proper action creators and reducers
+- Use proper TypeScript types for actions and state
+- Follow the module structure:
+- Implement proper state reset functionality
+- Use proper loading states with react-redux-loading-bar
+- Keep reducer logic pure and predictable
+- Implement proper error handling in reducers
+- Use proper state normalization
+- Implement proper state persistence when needed
+- Use proper selector patterns for state access
+- Implement proper middleware for side effects
+- Use proper action naming conventions
+- Implement proper state immutability
+- Use proper state composition patterns
+
+## Routing and Lazy Loading
+- Organize routes by feature/module:
+- Implement proper route structure:
+  - authorizedStructure for authenticated routes
+  - publicStructure for public routes
+  - anonymousStructure for error pages
+- Use React.lazy for component lazy loading
+- Implement proper route permissions:
+  - Use RoutePermittedRole for role-based access
+  - Implement proper route guards
+  - Handle unauthorized access
+- Follow route naming conventions:
+  - Use kebab-case for route paths
+  - Use descriptive route names
+  - Group related routes together
+- Implement proper route organization:
+  - Keep route configs in separate files
+  - Use route constants for paths
+  - Implement proper route nesting
+- Handle route parameters properly:
+  - Use proper parameter types
+  - Implement proper parameter validation
+  - Handle optional parameters
+- Implement proper route transitions:
+  - Use proper loading states
+  - Handle route errors
+  - Implement proper fallbacks
+- Use proper route hooks:
+  - useParams for route parameters
+  - useNavigate for navigation
+  - useLocation for location info
+- Implement proper route testing:
+  - Test route permissions
+  - Test route parameters
+  - Test route transitions
+- Handle route security:
+  - Implement proper authentication checks
+  - Handle session management
+  - Implement proper redirects
+
+## TypeScript Types and Enums
+- Organize types by feature/module in models directory:
+- Use proper type naming conventions:
+  - Interface names: PascalCase with 'I' prefix (e.g., IUserProfile)
+  - Type aliases: PascalCase (e.g., UserRole)
+  - Enum names: PascalCase (e.g., UserStatus)
+- Implement proper type organization:
+  - Keep shared types in Common.ts
+  - Place API-related types in APIDataProps.ts
+  - Store enums in enumerations directory
+  - Co-locate module-specific types with their modules
+- Use proper type definitions:
+  - Use interfaces for object shapes
+  - Use type aliases for unions and intersections
+  - Use enums for fixed sets of values
+  - Use readonly for immutable properties
+- Implement proper type safety:
+  - Avoid using any type
+  - Use unknown for unknown types
+  - Use proper type guards
+  - Implement proper null checking
+- Use proper type documentation:
+  - Document complex types with JSDoc
+  - Explain type constraints
+  - Document type relationships
+  - Provide usage examples
+- Follow type best practices:
+  - Use proper type inference
+  - Implement proper generic types
+  - Use proper utility types
+  - Follow proper type naming conventions
+- Handle API types properly:
+  - Define proper request/response types
+  - Use proper error types
+  - Implement proper loading states
+  - Use proper pagination types
+  - Use Tanstack query for api calls
+- Implement proper enum usage:
+  - Use string enums for better type safety
+  - Document enum values
+  - Use proper enum naming
+  - Implement proper enum validation
+
+## Performance
+- Implement proper memoization (useMemo, useCallback)
+- Use React.memo for expensive components
+- Avoid unnecessary re-renders
+- Implement proper lazy loading
+- Use proper key props in lists
+- Profile and optimize render performance
+- Use proper code splitting
+- Implement proper caching strategies
+- Use proper loading states
+- Optimize bundle size
+
+## Forms
+- Use controlled components for form inputs
+- Implement proper form validation
+- Handle form submission states properly
+- Show appropriate loading and error states
+- Use form libraries for complex forms
+- Implement proper accessibility for forms
+- Use proper form state management
+- Implement proper form error handling
+- Use proper form validation libraries
+- Implement proper form submission handling
+
+## Error Handling
+- Implement Error Boundaries
+- Handle async errors properly
+- Show user-friendly error messages
+- Implement proper fallback UI
+- Log errors appropriately
+- Handle edge cases gracefully
+- Use proper error tracking
+- Implement proper error recovery
+- Use proper error reporting
+- Implement proper error prevention
+
+## Testing
+- Write unit tests for components
+- Implement integration tests for complex flows
+- Use React Testing Library
+- Test user interactions
+- Test error scenarios
+- Implement proper mock data
+- Use proper test coverage
+- Implement proper test organization
+- Use proper test naming conventions
+- Implement proper test isolation
+
+## Accessibility
+- Use semantic HTML elements
+- Implement proper ARIA attributes
+- Ensure keyboard navigation
+- Test with screen readers
+- Handle focus management
+- Provide proper alt text for images
+- Use proper color contrast
+- Implement proper focus indicators
+- Use proper heading hierarchy
+- Implement proper form labels
+
+## Code Organization
+- Group related components together
+- Use proper file naming conventions
+- Implement proper directory structure
+- Keep styles close to components
+- Use proper imports/exports
+- Document complex component logic
+- Use proper code formatting
+- Implement proper code splitting
+- Use proper module organization
+- Implement proper code reuse
+
+## Styling
+- Use tailwind css for styling
+- Follow theme-based styling approach
+- Implement proper responsive design
+- Implement proper theme customization
+- Use proper style organization
+- Implement proper style reusability
+- Implement proper style documentation
+- Use proper style testing
+
+## TypeScript
+- Use proper type definitions
+- Implement proper interface design
+- Use proper type inference
+- Implement proper type safety
+- Use proper type documentation
+- Implement proper type organization
+- Use proper type naming conventions
+- Implement proper type testing
+- Use proper type checking
+- Implement proper type validation
+
+## Documentation
+- Document component props
+- Document component usage
+- Document component behavior
+- Document component examples
+- Document component limitations
+- Document component dependencies
+- Document component changes
+- Document component testing
+- Document component styling
+- Document component accessibility 

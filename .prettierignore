@@ -1,0 +1,98 @@
+#
+# .prettierignore
+#
+# This file tells Prettier which files and directories to ignore.
+# It uses the same syntax as a .gitignore file.
+#
+# Learn more at: https://prettier.io/docs/en/ignore.html
+#
+
+# -----------------------------------------------------------
+# Directories
+# -----------------------------------------------------------
+
+# Node.js module dependencies
+node_modules
+
+# Build output directories
+build
+dist
+out
+.cache
+coverage
+
+# Log and temporary files
+tmp
+temp
+logs
+*.log
+
+# -----------------------------------------------------------
+# Files and Specific Patterns
+# -----------------------------------------------------------
+
+# Configuration files that Prettier might incorrectly format
+# or where manual formatting is preferred.
+.env
+.env.*
+package-lock.json
+yarn.lock
+npm-debug.log*
+
+# Git-related files
+.git
+.gitignore
+.gitattributes
+
+# Files that are automatically generated or minified
+*.min.*
+*.map
+
+# Files with non-standard syntax or complex templates
+# (e.g., templates that Prettier might break)
+# Uncomment these if you encounter issues
+# *.liquid
+# *.handlebars
+# *.mustache
+
+# Vendor-specific code or third-party libraries
+# (e.g., files copied into your project)
+vendor/
+lib/
+
+# Test snapshots
+# (These files are not meant to be manually edited)
+__snapshots__/
+
+# Large data files or assets
+*.svg
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.mp4
+*.mp3
+
+# Compiled or generated code
+# (e.g., from a C++/Java project)
+*.exe
+*.dll
+*.class
+*.jar
+*.o
+
+# -----------------------------------------------------------
+# Specific Overrides
+# -----------------------------------------------------------
+
+# If a file is in an ignored directory but you want to format it,
+# you can use a negation pattern. For example, to format a specific
+# config file inside the `dist` folder:
+# !dist/config.js
+
+# To ignore a specific file by its full path:
+# src/data/legacy-data.js
+
+# To ignore all files with a specific extension in a particular directory:
+# src/legacy/**/*.js

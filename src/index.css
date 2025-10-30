@@ -1,0 +1,513 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-custom-color: var(--custom-color);
+  --color-custom-border: var(--custom-border);
+  --status-indicator: var(--status-green);
+  --color-success: var(--success);
+  --color-success-hover: var(--success-hover);
+  --color-error: var(--error);
+  --color-error-hover: var(--error-hover);
+  
+  --color-badge-purple-bg: var(--badge-purple-bg);
+  --color-badge-purple-text: var(--badge-purple-text);
+  --color-badge-purple-border: var(--badge-purple-border);
+  --color-badge-green-bg: var(--badge-green-bg);
+  --color-badge-green-text: var(--badge-green-text);
+  --color-badge-green-border: var(--badge-green-border);
+  --color-badge-blue-bg: var(--badge-blue-bg);
+  --color-badge-blue-text: var(--badge-blue-text);
+  --color-badge-blue-border: var(--badge-blue-border);
+  --color-badge-indigo-bg: var(--badge-indigo-bg);
+  --color-badge-indigo-text: var(--badge-indigo-text);
+  --color-badge-indigo-border: var(--badge-indigo-border);
+  --color-badge-emerald-bg: var(--badge-emerald-bg);
+  --color-badge-emerald-text: var(--badge-emerald-text);
+  --color-badge-emerald-border: var(--badge-emerald-border);
+  --color-badge-amber-bg: var(--badge-amber-bg);
+  --color-badge-amber-text: var(--badge-amber-text);
+  --color-badge-amber-border: var(--badge-amber-border);
+  --color-badge-orange-bg: var(--badge-orange-bg);
+  --color-badge-orange-text: var(--badge-orange-text);
+  --color-badge-orange-border: var(--badge-orange-border);
+  
+  --color-metric-green: var(--metric-green);
+  --color-metric-blue: var(--metric-blue);
+  --color-metric-purple: var(--metric-purple);
+  --color-metric-orange: var(--metric-orange);
+  --color-metric-amber: var(--metric-amber);
+  
+  --color-gradient-blue-light: var(--gradient-blue-light);
+  --color-gradient-indigo-light: var(--gradient-indigo-light);
+  --color-gradient-purple-light: var(--gradient-purple-light);
+  --color-gradient-green-light: var(--gradient-green-light);
+  --color-gradient-emerald-light: var(--gradient-emerald-light);
+  --color-gradient-amber-light: var(--gradient-amber-light);
+  --color-gradient-yellow-light: var(--gradient-yellow-light);
+  --color-gradient-orange-light: var(--gradient-orange-light);
+  --color-gradient-cyan-light: var(--gradient-cyan-light);
+  
+  --color-avatar-from: var(--avatar-from);
+  --color-avatar-to: var(--avatar-to);
+  
+  --color-action-blue: var(--action-blue);
+  --color-action-blue-hover: var(--action-blue-hover);
+  --color-action-green: var(--action-green);
+  --color-action-green-hover: var(--action-green-hover);
+  
+  --color-link-blue: var(--link-blue);
+  --color-link-blue-hover: var(--link-blue-hover);
+  
+  /* Stage colors for pipeline cards */
+  --color-stage-orange: oklch(0.55 0.18 50);
+  --color-stage-purple: oklch(0.50 0.18 300);
+  --color-stage-emerald: oklch(0.55 0.16 160);
+  --color-stage-indigo: oklch(0.50 0.16 260);
+  --color-stage-rose: oklch(0.55 0.20 10);
+  --color-stage-amber: oklch(0.55 0.15 70);
+  --color-stage-red: oklch(0.55 0.22 27);
+  --color-stage-teal: oklch(0.55 0.14 180);
+  --color-stage-violet: oklch(0.50 0.18 290);
+  --color-stage-cyan: oklch(0.60 0.14 200);
+  
+  /* Row alternating colors */
+  --color-row-blue-light: oklch(0.92 0.04 240);
+  --color-row-purple-light: oklch(0.92 0.04 300);
+  
+  /* Disabled/inactive colors */
+  --color-disabled: oklch(0.60 0.02 0);
+
+}
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.663 0.262 301.61);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+
+    /* custom color */
+    --custom-color: oklch(0.663 0.262 301.61);
+    --custom-border: oklch(0.9096 0.0022 278.37);
+    --status-green: oklch(0.6 0.15 140);
+    --status-red: oklch(0.577 0.245 27.325);
+    --status-success: oklch(0.65 0.18 145);
+    
+    /* Button colors */
+    --success: oklch(0.55 0.16 145);
+    --success-hover: oklch(0.50 0.16 145);
+    --error: oklch(0.55 0.22 27);
+    --error-hover: oklch(0.50 0.22 27);
+    
+    /* Badge and Card colors */
+    --badge-purple-bg: oklch(0.95 0.05 300);
+    --badge-purple-text: oklch(0.45 0.18 300);
+    --badge-purple-border: oklch(0.85 0.08 300);
+    
+    --badge-green-bg: oklch(0.95 0.05 145);
+    --badge-green-text: oklch(0.45 0.16 145);
+    --badge-green-border: oklch(0.85 0.08 145);
+    
+    --badge-blue-bg: oklch(0.95 0.05 240);
+    --badge-blue-text: oklch(0.45 0.16 240);
+    --badge-blue-border: oklch(0.85 0.08 240);
+    
+    --badge-indigo-bg: oklch(0.95 0.05 260);
+    --badge-indigo-text: oklch(0.45 0.16 260);
+    --badge-indigo-border: oklch(0.85 0.08 260);
+    
+    --badge-emerald-bg: oklch(0.95 0.05 160);
+    --badge-emerald-text: oklch(0.45 0.16 160);
+    --badge-emerald-border: oklch(0.85 0.08 160);
+    
+    --badge-amber-bg: oklch(0.95 0.08 70);
+    --badge-amber-text: oklch(0.40 0.15 70);
+    --badge-amber-border: oklch(0.85 0.10 70);
+    
+    --badge-orange-bg: oklch(0.95 0.08 50);
+    --badge-orange-text: oklch(0.45 0.18 50);
+    --badge-orange-border: oklch(0.85 0.10 50);
+    
+    /* Metric colors */
+    --metric-green: oklch(0.45 0.16 145);
+    --metric-blue: oklch(0.45 0.16 240);
+    --metric-purple: oklch(0.45 0.18 300);
+    --metric-orange: oklch(0.45 0.18 50);
+    --metric-amber: oklch(0.40 0.15 70);
+    
+    /* Gradient colors - Light mode */
+    --gradient-blue-light: oklch(0.96 0.02 240);
+    --gradient-indigo-light: oklch(0.95 0.03 260);
+    --gradient-purple-light: oklch(0.96 0.03 300);
+    --gradient-green-light: oklch(0.96 0.02 145);
+    --gradient-emerald-light: oklch(0.96 0.02 160);
+    --gradient-amber-light: oklch(0.96 0.03 70);
+    --gradient-yellow-light: oklch(0.97 0.04 90);
+    --gradient-orange-light: oklch(0.96 0.04 50);
+    --gradient-cyan-light: oklch(0.96 0.03 200);
+    
+    /* Avatar gradient */
+    --avatar-from: oklch(0.55 0.18 240);
+    --avatar-to: oklch(0.45 0.18 260);
+    
+    /* Action button colors */
+    --action-blue: oklch(0.50 0.18 240);
+    --action-blue-hover: oklch(0.45 0.18 240);
+    --action-green: oklch(0.50 0.16 145);
+    --action-green-hover: oklch(0.45 0.16 145);
+    
+    /* Link colors */
+    --link-blue: oklch(0.50 0.18 240);
+    --link-blue-hover: oklch(0.40 0.18 240);
+    
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.663 0.262 301.61);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+
+   /* custom color */
+   --custom-color: oklch(0.663 0.262 301.61); 
+   --custom-border: oklch(0.2122 0.0102 247.17);
+   --status-green: oklch(0.7 0.2 150);
+   --status-red: oklch(0.704 0.191 22.216);
+   --status-success: oklch(0.7 0.2 150);
+   
+   /* Button colors */
+   --success: oklch(0.60 0.18 145);
+   --success-hover: oklch(0.55 0.18 145);
+   --error: oklch(0.60 0.24 27);
+   --error-hover: oklch(0.55 0.24 27);
+   
+   /* Badge and Card colors - Dark mode */
+   --badge-purple-bg: oklch(0.25 0.05 300);
+   --badge-purple-text: oklch(0.75 0.12 300);
+   --badge-purple-border: oklch(0.35 0.08 300);
+   
+   --badge-green-bg: oklch(0.25 0.05 145);
+   --badge-green-text: oklch(0.75 0.12 145);
+   --badge-green-border: oklch(0.35 0.08 145);
+   
+   --badge-blue-bg: oklch(0.25 0.05 240);
+   --badge-blue-text: oklch(0.75 0.12 240);
+   --badge-blue-border: oklch(0.35 0.08 240);
+   
+   --badge-indigo-bg: oklch(0.25 0.05 260);
+   --badge-indigo-text: oklch(0.75 0.12 260);
+   --badge-indigo-border: oklch(0.35 0.08 260);
+   
+   --badge-emerald-bg: oklch(0.25 0.05 160);
+   --badge-emerald-text: oklch(0.75 0.12 160);
+   --badge-emerald-border: oklch(0.35 0.08 160);
+   
+   --badge-amber-bg: oklch(0.25 0.06 70);
+   --badge-amber-text: oklch(0.75 0.12 70);
+   --badge-amber-border: oklch(0.35 0.08 70);
+   
+   --badge-orange-bg: oklch(0.25 0.06 50);
+   --badge-orange-text: oklch(0.75 0.14 50);
+   --badge-orange-border: oklch(0.35 0.08 50);
+   
+   /* Metric colors - Dark mode */
+   --metric-green: oklch(0.70 0.14 145);
+   --metric-blue: oklch(0.70 0.14 240);
+   --metric-purple: oklch(0.70 0.14 300);
+   --metric-orange: oklch(0.70 0.14 50);
+   --metric-amber: oklch(0.70 0.13 70);
+   
+   /* Gradient colors - Dark mode */
+   --gradient-blue-light: oklch(0.24 0.04 240);
+   --gradient-indigo-light: oklch(0.24 0.04 260);
+   --gradient-purple-light: oklch(0.24 0.04 300);
+   --gradient-green-light: oklch(0.24 0.04 145);
+   --gradient-emerald-light: oklch(0.24 0.04 160);
+   --gradient-amber-light: oklch(0.24 0.04 70);
+   --gradient-yellow-light: oklch(0.24 0.04 90);
+   --gradient-orange-light: oklch(0.24 0.04 50);
+   --gradient-cyan-light: oklch(0.20 0.03 200);
+   
+   /* Avatar gradient - Dark mode */
+   --avatar-from: oklch(0.55 0.18 240);
+   --avatar-to: oklch(0.45 0.18 260);
+   
+   /* Action button colors - Dark mode */
+   --action-blue: oklch(0.55 0.16 240);
+   --action-blue-hover: oklch(0.50 0.16 240);
+   --action-green: oklch(0.55 0.14 145);
+   --action-green-hover: oklch(0.50 0.14 145);
+   
+   /* Link colors - Dark mode */
+   --link-blue: oklch(0.65 0.16 240);
+   --link-blue-hover: oklch(0.75 0.16 240);
+   
+   /* Stage colors for pipeline cards - Dark mode */
+   --color-stage-orange: oklch(0.65 0.16 50);
+   --color-stage-purple: oklch(0.65 0.16 300);
+   --color-stage-emerald: oklch(0.65 0.14 160);
+   --color-stage-indigo: oklch(0.65 0.14 260);
+   --color-stage-rose: oklch(0.65 0.18 10);
+   --color-stage-amber: oklch(0.65 0.13 70);
+   --color-stage-red: oklch(0.65 0.20 27);
+   --color-stage-teal: oklch(0.65 0.12 180);
+   --color-stage-violet: oklch(0.65 0.16 290);
+   --color-stage-cyan: oklch(0.70 0.12 200);
+   
+   /* Row alternating colors - Dark mode */
+   --color-row-blue-light: oklch(0.20 0.04 240);
+   --color-row-purple-light: oklch(0.20 0.04 300);
+   
+   /* Disabled/inactive colors - Dark mode */
+   --color-disabled: oklch(0.50 0.02 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.backgorund-gradinet-image{
+  background-image: url('@/assets/Images/gradient-hero-prerender.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* 3D Flip Animation Styles */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Hide scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  
+}
+
+/* Custom thin scrollbar styles */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+/* Vertical scrollbar */
+.scrollbar-thin::-webkit-scrollbar:vertical {
+  width: 4px !important;
+}
+
+/* Horizontal scrollbar */
+.scrollbar-thin::-webkit-scrollbar:horizontal {
+  height: 4px !important;
+}
+
+/* General scrollbar fallback */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px !important;
+  height: 4px !important;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent !important;
+  border-radius: 2px !important;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.4) !important;
+  border-radius: 2px !important;
+  transition: background 0.2s ease !important;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.6) !important;
+}
+
+/* Dark mode scrollbar */
+.dark .scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(75, 85, 99, 0.4) !important;
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(75, 85, 99, 0.6) !important;
+}
+
+/* Force horizontal scrollbar height specifically */
+.scrollbar-thin::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+
+/* More specific targeting for horizontal scrollbars */
+.scrollbar-thin::-webkit-scrollbar[style*="horizontal"] {
+  height: 4px !important;
+}
+
+/* Target all possible horizontal scrollbar scenarios */
+*::-webkit-scrollbar:horizontal {
+  height: 4px !important;
+}
+
+*::-webkit-scrollbar[data-orientation="horizontal"] {
+  height: 4px !important;
+}
+
+/* Force thin scrollbars on all scrollable elements with our class */
+.scrollbar-thin,
+.scrollbar-thin *,
+.scrollbar-thin *::-webkit-scrollbar {
+  scrollbar-width: thin !important;
+}
+
+.scrollbar-thin *::-webkit-scrollbar:horizontal,
+.scrollbar-thin *::-webkit-scrollbar[style*="horizontal"] {
+  height: 4px !important;
+}
+
+.scrollbar-thin *::-webkit-scrollbar:vertical,
+.scrollbar-thin *::-webkit-scrollbar[style*="vertical"] {
+  width: 4px !important;
+}
+
+/* Hide scrollbar while keeping scroll functionality */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none !important;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
