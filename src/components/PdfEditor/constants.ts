@@ -1,4 +1,4 @@
-import { Image, Minus, Table, Triangle, Type } from 'lucide-react'
+import { Image, Minus, QrCode, Table, Triangle, Type } from 'lucide-react'
 import { ItemTypes, type ElementConfig } from './types'
 
 // A4 page dimensions (standard ISO 216)
@@ -56,6 +56,14 @@ export const ELEMENT_CONFIGS: ElementConfig[] = [
     id: 'line-element',
     label: 'Line',
     icon: Minus,
+    bgColor: 'bg-gray-100',
+    textColor: 'text-gray-800',
+  },
+  {
+    type: ItemTypes.QR_CODE,
+    id: 'qr-element',
+    label: 'QR Code',
+    icon: QrCode,
     bgColor: 'bg-gray-100',
     textColor: 'text-gray-800',
   },

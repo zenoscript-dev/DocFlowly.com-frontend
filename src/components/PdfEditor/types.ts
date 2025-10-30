@@ -52,6 +52,12 @@ export interface DragItem {
   lineStyle?: LineStyle
   tableData?: TableData
   imageUrl?: string // Image data URL for image elements
+  qrCodeData?: { url: string, size: number, style?: React.CSSProperties, viewBox?: string } // QR code data for QR code elements
+  qrCodeStyle?: {
+    width: number
+    height: number
+    viewBox?: string
+  }
 }
 
 // Define item types for drag and drop
@@ -61,6 +67,7 @@ export const ItemTypes = {
   SHAPE: 'shape',
   TABLE: 'table',
   LINE: 'line',
+  QR_CODE: 'qrcode',
 } as const
 
 export type ItemType = typeof ItemTypes[keyof typeof ItemTypes]

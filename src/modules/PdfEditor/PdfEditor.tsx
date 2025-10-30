@@ -5,6 +5,7 @@ import PageSettingsPanel from '@/components/PdfEditor/PageSettingsPanel'
 import PageTabs from '@/components/PdfEditor/PageTabs'
 
 import PdfEditorToolBar from '@/components/PdfEditor/PdfEditorToolBar'
+import QrCodeSettingsPanel from '@/components/PdfEditor/QrCodeSettingsPanel'
 import SignatureModal from '@/components/PdfEditor/SignatureModal'
 import TableSettingsPanel from '@/components/PdfEditor/TableSettingsPanel'
 import TextFormattingToolbar from '@/components/PdfEditor/TextFormattingToolbar'
@@ -420,6 +421,21 @@ const PdfEditor = () => {
                 onUpdate={handleTableSettingsUpdate}
               />
             )}
+
+          {/* QR Code Settings - Show when qrcode element is selected */}
+          {selectedElement.type === 'qrcode' && selectedElementData?.qrCodeData && (
+            <QrCodeSettingsPanel
+              url={selectedElementData.qrCodeData.url}
+              size={selectedElementData.qrCodeData.size}
+              viewBox={selectedElementData.qrCodeData.viewBox}
+              onUpdate={(updates) => {
+                if (!dropZoneRef.current || !selectedElement.id || !selectedElementData?.qrCodeData) return
+                const merged = { ...selectedElementData.qrCodeData, ...updates }
+                dropZoneRef.current.updateElementStyle(selectedElement.id, { qrCodeData: merged })
+              }}
+              onClose={() => setShowPageSettings(true)}
+            />
+          )}
 
             {/* Media Library - Show when media is clicked */}
             {showMediaLibrary && (

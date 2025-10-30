@@ -7,6 +7,7 @@ import ShapeElement from './ToolBarComponents/ShapeElement'
 import SignatureElement from './ToolBarComponents/SignatureElement'
 import TableElement from './ToolBarComponents/TableElement'
 import TextElement from './ToolBarComponents/TextElement'
+import QrCodeElement from './ToolBarComponents/QrCodeElement'
 
 interface PdfEditorToolBarProps {
   onElementClick: (elementType: string) => void
@@ -72,6 +73,7 @@ const PdfEditorToolBar = ({ onElementClick }: PdfEditorToolBarProps) => {
         <LineElement onClick={() => onElementClick('line')} />
         <SignatureElement onClick={() => onElementClick('signature')} />
         <DataElement onClick={() => onElementClick('data')} />
+        <QrCodeElement onClick={() => onElementClick('qrcode')} />
       </div>
     </div>
   )

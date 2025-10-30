@@ -1,5 +1,7 @@
 import { PDFDocument, rgb } from 'pdf-lib'
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
+import { renderToString } from 'react-dom/server'
+import QRCode from 'react-qr-code'
 import { v4 as uuidv4 } from 'uuid'
 import A4Page from './A4Page'
 import { getPxToMmFactor } from './constants'
@@ -94,6 +96,34 @@ const rotateImageDataUrl = async (dataUrl: string, rotation: number): Promise<st
     }
     img.onerror = reject
     img.src = dataUrl
+  })
+}
+
+// Generate a PNG data URL for a QR code using server-side render of SVG and rasterization
+const generateQrPngDataUrl = async (text: string, size: number): Promise<string> => {
+  // Render QRCode (SVG) to string
+  const svgString = renderToString(<QRCode value={text} size={size} />)
+  // Convert SVG string to data URL
+  const svgDataUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgString)
+
+  // Rasterize SVG to PNG via canvas
+  return await new Promise<string>((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => {
+      const canvas = document.createElement('canvas')
+      canvas.width = size
+      canvas.height = size
+      const ctx = canvas.getContext('2d')
+      if (!ctx) {
+        reject(new Error('Could not get canvas context'))
+        return
+      }
+      ctx.clearRect(0, 0, size, size)
+      ctx.drawImage(img, 0, 0, size, size)
+      resolve(canvas.toDataURL('image/png'))
+    }
+    img.onerror = reject
+    img.src = svgDataUrl
   })
 }
 
@@ -211,8 +241,8 @@ const DropZone = forwardRef<DropZoneRef>((_props, ref) => {
     // Find a position that doesn't overlap with existing elements
     let x = 50
     let y = 50
-    const newElementWidth = elementType === 'table' ? 400 : elementType === 'line' ? 200 : 100
-    const newElementHeight = elementType === 'table' ? 180 : elementType === 'line' ? 2 : 100
+    const newElementWidth = elementType === 'table' ? 400 : elementType === 'line' ? 200 : elementType === 'qrcode' ? 140 : 100
+    const newElementHeight = elementType === 'table' ? 180 : elementType === 'line' ? 2 : elementType === 'qrcode' ? 140 : 100
     
     // Try positions until we find one without overlap
     let attempts = 0
@@ -290,6 +320,11 @@ const DropZone = forwardRef<DropZoneRef>((_props, ref) => {
         endArrow: 'none',
         lineWidth: 2,
         color: 'black'
+      }
+    } else if (elementType === 'qrcode') {
+      baseElement.qrCodeData = {
+        url: 'https://docflowly.app',
+        size: Math.min(newElementWidth, newElementHeight)
       }
     }
     
@@ -589,6 +624,21 @@ const DropZone = forwardRef<DropZoneRef>((_props, ref) => {
               } catch (error) {
                 console.error('[PDF Export] Failed to embed/draw image:', error)
               }
+            } else if (element.type === 'qrcode' && element.qrCodeData && element.qrCodeData.url) {
+              try {
+                const qrSize = Math.min(element.size.width, element.size.height)
+                const qrPngDataUrl = await generateQrPngDataUrl(element.qrCodeData.url, Math.round(qrSize))
+                const qrBytes = dataUrlToUint8Array(qrPngDataUrl)
+                const qrImage = await pdfDoc.embedPng(qrBytes)
+                page.drawImage(qrImage, {
+                  x: x,
+                  y: y,
+                  width: width,
+                  height: height
+                })
+              } catch (error) {
+                console.error('[PDF Export] Failed to render QR code:', error)
+              }
                   } else if (element.type === 'table' && element.tableData) {
               // Render table element
               const { rows, columns, cellData, headerColor, showBodyBorder } = element.tableData
@@ -855,6 +905,21 @@ const DropZone = forwardRef<DropZoneRef>((_props, ref) => {
               } catch (error) {
                 console.error('[PDF Preview] Failed to embed/draw image:', error)
               }
+            } else if (element.type === 'qrcode' && element.qrCodeData && element.qrCodeData.url) {
+              try {
+                const qrSize = Math.min(element.size.width, element.size.height)
+                const qrPngDataUrl = await generateQrPngDataUrl(element.qrCodeData.url, Math.round(qrSize))
+                const qrBytes = dataUrlToUint8Array(qrPngDataUrl)
+                const qrImage = await pdfDoc.embedPng(qrBytes)
+                page.drawImage(qrImage, {
+                  x: x,
+                  y: y,
+                  width: width,
+                  height: height
+                })
+              } catch (error) {
+                console.error('[PDF Preview] Failed to render QR code:', error)
+              }
             } else if (element.type === 'table' && element.tableData) {
               const { rows, columns, cellData, headerColor, showBodyBorder } = element.tableData
               const cellWidth = width / columns
@@ -1002,8 +1067,8 @@ const DropZone = forwardRef<DropZoneRef>((_props, ref) => {
       const existingElements = currentSheet?.elements || []
       
       let x = 50, y = 50
-      const newElementWidth = elementType === 'table' ? 400 : elementType === 'line' ? 200 : 100
-      const newElementHeight = elementType === 'table' ? 180 : elementType === 'line' ? 2 : 100
+      const newElementWidth = elementType === 'table' ? 400 : elementType === 'line' ? 200 : elementType === 'qrcode' ? 140 : 100
+      const newElementHeight = elementType === 'table' ? 180 : elementType === 'line' ? 2 : elementType === 'qrcode' ? 140 : 100
       
       let attempts = 0, positionFound = false
       while (!positionFound && attempts < 100) {
@@ -1063,6 +1128,20 @@ const DropZone = forwardRef<DropZoneRef>((_props, ref) => {
             columnFontSizes: {},
             rowFontSizes: {},
             cellFontSizes: {}
+          }
+        }
+      } else if (elementType === 'qrcode') {
+        element = {
+          type: 'qrcode',
+          id: `${selectedPageId}-${uuidv4()}`,
+          position: { x, y },
+          size: { width: newElementWidth, height: newElementHeight },
+          rotation: 0,
+          color: 'transparent',
+          zIndex: maxZIndex + 1,
+          qrCodeData: {
+            url: 'https://docflowly.app',
+            size: Math.min(newElementWidth, newElementHeight)
           }
         }
       } else {

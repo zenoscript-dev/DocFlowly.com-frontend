@@ -1,5 +1,6 @@
 import { Copy, Lock, MessageSquarePlus, MoreVertical, Move, RotateCw, Sparkles, Trash2 } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import QRCode from 'react-qr-code'
 import { A4_PAGE_HEIGHT_PX, A4_PAGE_WIDTH_PX } from './constants'
 import TableElement from './TableElement'
 import type { DragItem } from './types'
@@ -566,6 +567,15 @@ const DroppedElement = ({
             alt="Uploaded image"
             className="w-full h-full object-contain"
           />
+        ) : element.type === 'qrcode' ? (
+          <div className="w-full h-full flex items-center justify-center">
+            <QRCode
+              value={element.qrCodeData?.url || ''}
+              size={Math.min(element.size.width, element.size.height)}
+              viewBox={element.qrCodeData?.viewBox}
+              style={{ width: '100%', height: '100%' }}
+            />
+          </div>
         ) : (
           <div className={`w-full h-full border-2 border-dashed ${
             isSelected ? 'border-purple-500' : 'border-blue-500'
